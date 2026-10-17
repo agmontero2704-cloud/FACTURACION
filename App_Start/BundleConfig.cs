@@ -1,52 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Optimization;
-using System.Web.UI;
+﻿using System.Web.Optimization;
 
 namespace FACTURACION
 {
+    /// <summary>
+    /// Configura los bundles (agrupaciones) de scripts y estilos de la aplicación.
+    /// Se ejecuta en Application_Start a través de Global.asax.cs.
+    /// </summary>
     public class BundleConfig
     {
-        // Para obtener más información sobre las uniones, visite https://go.microsoft.com/fwlink/?LinkID=303951
+        /// <summary>
+        /// Registra los bundles utilizados por el sitio.
+        /// Actualmente incluye jQuery y el script propio site.js.
+        /// </summary>
+        /// <param name="bundles">Colección de bundles de la aplicación</param>
         public static void RegisterBundles(BundleCollection bundles)
         {
-            RegisterJQueryScriptManager();
+            // Bundle de jQuery (librería externa)
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                            "~/Scripts/jquery-3.7.0.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/WebFormsJs").Include(
-                            "~/Scripts/WebForms/WebForms.js",
-                            "~/Scripts/WebForms/WebUIValidation.js",
-                            "~/Scripts/WebForms/MenuStandards.js",
-                            "~/Scripts/WebForms/Focus.js",
-                            "~/Scripts/WebForms/GridView.js",
-                            "~/Scripts/WebForms/DetailsView.js",
-                            "~/Scripts/WebForms/TreeView.js",
-                            "~/Scripts/WebForms/WebParts.js"));
-
-            // El orden es muy importante para el funcionamiento de estos archivos ya que tienen dependencias explícitas
-            bundles.Add(new ScriptBundle("~/bundles/MsAjaxJs").Include(
-                    "~/Scripts/WebForms/MsAjax/MicrosoftAjax.js",
-                    "~/Scripts/WebForms/MsAjax/MicrosoftAjaxApplicationServices.js",
-                    "~/Scripts/WebForms/MsAjax/MicrosoftAjaxTimer.js",
-                    "~/Scripts/WebForms/MsAjax/MicrosoftAjaxWebForms.js"));
-
-            // Use la versión de desarrollo de Modernizr para desarrollar y aprender. Luego, cuando esté listo
-            // para la producción, use la herramienta de compilación disponible en https://modernizr.com para seleccionar solo las pruebas que necesite
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                            "~/Scripts/modernizr-*"));
-        }
-
-        public static void RegisterJQueryScriptManager()
-        {
-            ScriptManager.ScriptResourceMapping.AddDefinition("jquery",
-                new ScriptResourceDefinition
-                {
-                    Path = "~/scripts/jquery-3.7.0.min.js",
-                    DebugPath = "~/scripts/jquery-3.7.0.js",
-                    CdnPath = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.0.min.js",
-                    CdnDebugPath = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.0.js"
-                });
+            // Bundle de script propio del sitio (desplazamiento suave y menú activo)
+            bundles.Add(new ScriptBundle("~/bundles/site").Include(
+                            "~/Scripts/site.js"));
         }
     }
 }

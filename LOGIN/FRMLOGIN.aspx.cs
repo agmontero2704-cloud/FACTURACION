@@ -1,100 +1,107 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace FACTURACION.LOGIN
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    /// <summary>
+    /// Página de inicio de sesión. Valida al usuario contra la base de datos
+    /// y, si es correcto, almacena los datos en sesión y redirige al inicio.
+    /// </summary>
+    public partial class LoginPage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Iniciar el foco en el primer textbox
-            TxtUsuario.Focus();
+            // Establece el foco en el campo de usuario al cargar la página
+            usernameTextBox.Focus();
         }
 
-        protected void BtnAceptar_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Evento al hacer clic en el botón Aceptar. Valida credenciales del usuario.
+        /// </summary>
+        protected void AcceptButton_Click(object sender, EventArgs e)
         {
-            //Conexion a la DB
-            SqlConnection SqlCon = new SqlConnection();
-
-            //Insercccion de los datos a la DB
             try
             {
-                SqlCon = ConexionDB.getInstancia().CrearConexion();
-                SqlParameter param = new SqlParameter("@usuario", TxtUsuario.Text.Trim());
-                SqlParameter param1 = new SqlParameter("@clave", TxtClave.Text.Trim());
-                SqlCommand cmd = new SqlCommand("sp_checlogin", SqlCon);
-                cmd.Parameters.Add(param);
-                cmd.Parameters.Add(param1);
-                cmd.CommandType = CommandType.StoredProcedure;
-                SqlCon.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-
-                if (dr.Read())
+                // Crea conexión y comando para ejecutar el procedimiento de validación de login
+                using (SqlConnection sqlConnection = DatabaseConnection.GetInstance().CreateConnection())
+                using (SqlCommand sqlCommand = new SqlCommand("sp_CheckLogin", sqlConnection))
                 {
-                    //Variables de seccion
-                    Session["Log_Status"]      = dr["log_status"].ToString();
-                    Session["Log_Codigo"]      = dr["log_codigo"].ToString();
-                    Session["Log_Usuario1"]    = TxtUsuario.Text;
-                    Session["Log_Nombre"]      = dr["log_nombre"].ToString();
-                    Session["Log_Apellido"]    = dr["log_apellido"].ToString();
-                    Session["Log_Departamento"] = dr["log_departamento"].ToString();
-                    Session["Log_Cargo"]       = dr["log_cargo"].ToString();
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.Add(new SqlParameter("@usuario", usernameTextBox.Text.Trim()));
+                    sqlCommand.Parameters.Add(new SqlParameter("@clave", passwordTextBox.Text.Trim()));
+                    sqlConnection.Open();
 
-                    if (dr["log_status"].ToString() == "Activo")
+                    // Lee el resultado del procedimiento almacenado
+                    using (SqlDataReader dataReader = sqlCommand.ExecuteReader())
                     {
-                        LblMensaje.Text = "Mensaje.: Login correcto";
+                        if (dataReader.Read())
+                        {
+                            // Almacena los datos del usuario en variables de sesión
+                            Session["LoginStatus"] = dataReader["log_status"].ToString();
+                            Session["LoginCode"] = dataReader["log_codigo"].ToString();
+                            Session["LoginUser"] = usernameTextBox.Text;
+                            Session["LoginName"] = dataReader["log_nombre"].ToString();
+                            Session["LoginSurname"] = dataReader["log_apellido"].ToString();
+                            Session["LoginDepartment"] = dataReader["log_departamento"].ToString();
+                            Session["LoginRole"] = dataReader["log_cargo"].ToString();
 
-                        TxtUsuario.Enabled = false;
-                        TxtClave.Enabled   = false;
-                        BtnAceptar.Enabled = false;
+                            // Si el usuario está activo, bloquea campos y redirige tras el temporizador
+                            if (dataReader["log_status"].ToString() == "Activo")
+                            {
+                                messageLabel.Text = "Mensaje.: Login correcto";
 
-                        ImgCerradura.ImageUrl = "~/Imagenes/CerraduraVerde.png";
-                        Timer2.Enabled = true;
-                    }
-                    else
-                    {
-                        LblMensaje.Text = "Mensaje.: Usuario Inabilitado";
-                        Timer2.Enabled  = true;
+                                usernameTextBox.Enabled = false;
+                                passwordTextBox.Enabled = false;
+                                acceptButton.Enabled = false;
+
+                                lockImage.ImageUrl = "~/IMAGENES/CerraduraVerde.png";
+                                sessionTimer.Enabled = true;
+                            }
+                            else
+                            {
+                                // Usuario existe pero está inhabilitado
+                                messageLabel.Text = "Mensaje.: Usuario Inhabilitado";
+                                sessionTimer.Enabled = true;
+                            }
+                        }
+                        else
+                        {
+                            // Credenciales incorrectas
+                            messageLabel.Text = "Mensaje.: Login incorrecto";
+                            sessionTimer.Enabled = true;
+                        }
                     }
                 }
-                else
-                {
-                    LblMensaje.Text = "Mensaje.: Login incorrecto";
-                    Timer2.Enabled  = true;
-                }
             }
-            catch
+            catch (Exception exception)
             {
-                LblMensaje.Text = "Mensaje.: No hay conexion con la Base de Datos";
-            }
-            finally
-            {
-                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+                // Error de conexión con la base de datos
+                System.Diagnostics.Debug.WriteLine("Error de conexion con la Base de Datos: " + exception.Message);
+                messageLabel.Text = "Mensaje.: No hay conexion con la Base de Datos";
             }
         }
 
-        protected void Timer1_Tick1(object sender, EventArgs e)
+        /// <summary>
+        /// Temporizador de sesión. Si el login fue correcto, redirige a la página de inicio.
+        /// Si no, limpia el mensaje y reactiva los campos para un nuevo intento.
+        /// </summary>
+        protected void SessionTimer_Tick(object sender, EventArgs e)
         {
-            //Acceder al menu de la aplicacion y quitar mensajes
-            if (LblMensaje.Text == "Mensaje.: Login correcto")
+            // Si el mensaje indica login exitoso, redirige al menú principal
+            if (messageLabel.Text == "Mensaje.: Login correcto")
             {
-                Session["Log_Usuario"] = LblMensaje.Text;
                 Response.Redirect("~/Default.aspx");
             }
             else
             {
-                LblMensaje.Text    = "";
-                Timer2.Enabled     = false;
-                TxtUsuario.Enabled = true;
-                TxtClave.Enabled   = true;
-                BtnAceptar.Enabled = true;
-                TxtUsuario.Focus();
+                // Limpia mensaje y habilita los campos para otro intento
+                messageLabel.Text = "";
+                sessionTimer.Enabled = false;
+                usernameTextBox.Enabled = true;
+                passwordTextBox.Enabled = true;
+                acceptButton.Enabled = true;
+                usernameTextBox.Focus();
             }
         }
     }

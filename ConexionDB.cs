@@ -1,73 +1,49 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Configuration;
 using System.Data.SqlClient;
-
-using System.Configuration;
 
 namespace FACTURACION
 {
-    public class ConexionDB
+    /// <summary>
+    /// Clase encargada de gestionar la conexión a la base de datos del sistema.
+    /// Implementa el patrón Singleton para garantizar una única instancia de conexión.
+    /// </summary>
+    public class DatabaseConnection
     {
-        // Atributos
-        private string Base;
-        private string Servidor;
-        private string Usuario; // Aunque no se use con Windows Auth, conviene dejarlo para que coincida con el if/else de la diapositiva
-        private string Clave;
-        private bool seguridad;
-        private static ConexionDB Con = null;
+        // Instancia única de la clase (patrón Singleton)
+        private static DatabaseConnection _instance;
 
-        // Constructor
-        private ConexionDB()
+        // Constructor privado para evitar instanciación externa
+        private DatabaseConnection()
         {
-            this.Base = "Facturacion";
-            this.Servidor = "localhost"; // O puedes usar "."
-            this.seguridad = true;       // Activa la Autenticación de Windows
         }
 
-        // Método de Conexión efectivo
-        public SqlConnection CrearConexion()
+        /// <summary>
+        /// Obtiene la instancia única de la conexión a base de datos.
+        /// </summary>
+        /// <returns>Instancia de DatabaseConnection</returns>
+        public static DatabaseConnection GetInstance()
         {
-            SqlConnection Cadena = new SqlConnection();
-            try
+            if (_instance == null)
             {
-                var cnSetting = ConfigurationManager.ConnectionStrings["CnFact"];
-                if (cnSetting != null && !string.IsNullOrWhiteSpace(cnSetting.ConnectionString))
-                {
-                    Cadena.ConnectionString = cnSetting.ConnectionString;
-                }
-                else
-                {
-                    Cadena.ConnectionString = "Server=" + this.Servidor + "; Database=" + this.Base + ";";
-
-                    if (this.seguridad)
-                    {
-                        Cadena.ConnectionString = Cadena.ConnectionString + "Integrated Security = SSPI;";
-                    }
-                    else
-                    {
-                        Cadena.ConnectionString = Cadena.ConnectionString + "User Id=" + this.Usuario + "; Password=" + this.Clave + ";";
-                    }
-                }
+                _instance = new DatabaseConnection();
             }
-            catch (Exception ex)
-            {
-                Cadena = null;
-                throw ex;
-            }
-
-            return Cadena;
+            return _instance;
         }
 
-        // Método para obtener la instancia
-        public static ConexionDB getInstancia()
+        /// <summary>
+        /// Crea una conexión SQL usando la cadena de conexión "CnFact" definida en Web.config.
+        /// Si no existe la cadena de configuración, usa valores por defecto (localhost, Facturacion, seguridad integrada).
+        /// </summary>
+        /// <returns>Objeto SqlConnection listo para abrirse</returns>
+        public SqlConnection CreateConnection()
         {
-            if (Con == null)
-            {
-                Con = new ConexionDB();
-            }
-            return Con;
+            // Lee la configuración de cadena de conexión desde Web.config
+            var connectionSetting = ConfigurationManager.ConnectionStrings["CnFact"];
+            string connectionString = connectionSetting != null && !string.IsNullOrWhiteSpace(connectionSetting.ConnectionString)
+                ? connectionSetting.ConnectionString
+                : "Server=localhost; Database=Facturacion; Integrated Security=SSPI;";
+
+            return new SqlConnection(connectionString);
         }
     }
 }

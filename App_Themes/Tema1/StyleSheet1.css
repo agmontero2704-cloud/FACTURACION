@@ -129,7 +129,7 @@ body {
     position: relative;
 }
 
-#barraHorizontal {
+#topBar {
     height: 40px;
     background-color: #A64E06;
     border-radius: 0px 0px 10px 10px;
@@ -139,13 +139,13 @@ body {
     margin: 0 auto;
 }
 
-#barraHorizontal > ul {
+#topBar > ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-#barraHorizontal li {
+#topBar li {
     display: inline-block;
     padding: 10px;
     cursor: pointer;
@@ -154,7 +154,7 @@ body {
     box-shadow: 0px 0px 5px #000 inset;
 }
 
-#barraHorizontal li > a {
+#topBar li > a {
     display: block;
     color: #A64E06;
     text-decoration: none;

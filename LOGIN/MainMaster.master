@@ -1,0 +1,84 @@
+﻿<%-- Master page principal del sistema. Define la estructura común (cabecera, menú, columnas y pie)
+    para todas las páginas hijas. Carga jQuery y el script propio site.js al final del cuerpo. --%>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs" Inherits="FACTURACION.LOGIN.MainMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=1280, initial-scale=1.0"/>
+    <title>Sistema de Facturacion</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/IMAGENES/Favicon.png"/>
+    <%-- Lugar donde se inyecta el contenido del encabezado de cada página --%>
+    <asp:ContentPlaceHolder ID="headPlaceholder" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="contenedorApp">
+            <div id="cabecera">
+                <div id="contenidoCabecera">
+                    <%-- Barra de navegación superior --%>
+                    <div id="topBar">
+                        <ul>
+                            <li><a href="/Default.aspx">Inicio</a></li>
+                            <li><a href="/mantenimiento/MaintenancePage.aspx">Mantenimiento</a></li>
+                            <%-- TODO: Operaciones/Reportes/Seguridad/Utilitarios/Ayuda aún apuntan a un marcador temporal. Crear sus páginas y actualizar estos enlaces. --%>
+                            <li><a href="/Default.aspx">Operaciones</a></li>
+                            <li><a href="/Default.aspx">Reportes</a></li>
+                            <li><a href="/Default.aspx">Seguridad</a></li>
+                            <li><a href="/Default.aspx">Utilitarios</a></li>
+                            <li><a href="/Default.aspx">Ayuda</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="logotipo">
+                        <%-- Llamar imagen de la Base de datos --%>
+                        <div class="row">
+                            <asp:Repeater ID="logoRepeater" runat="server">
+                                <ItemTemplate>
+                                    <div class="col-md-4">
+                                        <img class="img-responsive" src="data:image/jpg;base64,<%# Convert.ToBase64String((byte[])DataBinder.Eval(Container.DataItem, "Emp_Logo"))%>" />
+                                        <br />
+                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>
+                    </div>
+
+                    <div id="titulo">
+                        <h1>Sistema de Facturacion Electronica</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div id="bajo">
+                <%-- Columna izquierda: menú contextual --%>
+                <div id="columnIzq">
+                    <asp:ContentPlaceHolder ID="contextualMenuPlaceholder" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+
+                <%-- Columna centro: contenido principal --%>
+                <div id="columnCentro">
+                    <asp:ContentPlaceHolder ID="mainContentPlaceholder" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+
+                <%-- Columna derecha (vacía por ahora) --%>
+                <div id="columnDer">
+                </div>
+
+                <%-- Pie de página --%>
+                <div id="pie">
+                    <span id="copy">&nbsp;&nbsp;&nbsp;&nbsp;Copyright &copy; 2026 / Version: 1.0</span>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <%-- Carga los bundles de jQuery y site.js al final del cuerpo --%>
+    <%: Scripts.Render("~/bundles/jquery") %>
+    <%: Scripts.Render("~/bundles/site") %>
+</body>
+</html>
