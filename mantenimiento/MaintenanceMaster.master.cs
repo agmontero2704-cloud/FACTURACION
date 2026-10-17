@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 
 namespace FACTURACION.mantenimiento
 {
     /// <summary>
     /// Master page anidada para el módulo de Mantenimiento. Define el menú contextual
-    * lateral y expone un ContentPlaceHolder para el contenido de cada página de mantenimiento.
+    /// lateral y expone un ContentPlaceHolder para el contenido de cada página de mantenimiento.
     /// </summary>
     public partial class MaintenanceMaster : System.Web.UI.MasterPage
     {

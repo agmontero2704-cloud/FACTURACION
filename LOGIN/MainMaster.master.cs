@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 
 namespace FACTURACION.LOGIN
 {
     /// <summary>
     /// Master page principal del sistema. Define la estructura común
-    * (cabecera, menú, columnas y pie de página) para todas las páginas hijas.
+    /// (cabecera, menú, columnas y pie de página) para todas las páginas hijas.
     /// </summary>
     public partial class MainMaster : System.Web.UI.MasterPage
     {
