@@ -43,67 +43,67 @@ body {
     font-size: 25px;
 }
 
-.CajasAlmacen {
+.CajasAlmacen, .warehouseImage {
     position: absolute;
     top: 253px;
     left: 249px;
 }
 
-.PnlAcceso {
+.PnlAcceso, .accessPanel {
     position: absolute;
     top: 327px;
     left: 380px;
 }
 
-.LblControl {
+.LblControl, .controlLabel {
     position: absolute;
     top: 7px;
     left: 186px;
 }
 
-.PnlMensaje {
+.PnlMensaje, .messagePanel {
     position: absolute;
     top: 232px;
     left: 0px;
 }
 
-.LblMensaje {
+.LblMensaje, .messageLabel {
     position: absolute;
     top: 10px;
     left: 10px;
 }
 
-.ImgCerradura {
+.ImgCerradura, .lockImage {
     position: absolute;
     top: 92px;
     left: 13px;
 }
 
-.BtnAceptar {
+.BtnAceptar, .acceptButton {
     position: absolute;
     top: 177px;
     left: 418px;
 }
 
-.TxtUsuario {
+.TxtUsuario, .usernameTextBox {
     position: absolute;
     top: 73px;
     left: 250px;
 }
 
-.TxtClave {
+.TxtClave, .passwordTextBox {
     position: absolute;
     top: 133px;
     left: 250px;
 }
 
-.LblUsuario {
+.LblUsuario, .usernameLabel {
     position: absolute;
     top: 73px;
     left: 170px;
 }
 
-.LblClave {
+.LblClave, .passwordLabel {
     position: absolute;
     top: 133px;
     left: 170px;

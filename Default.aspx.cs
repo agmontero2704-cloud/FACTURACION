@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -14,19 +14,19 @@ namespace FACTURACION
         protected void Page_Load(object sender, EventArgs e)
         {
             // Valida que el usuario haya iniciado sesión; de lo contrario, redirige al login
-            if (Session["LoginUser"] == null)
+            if (Session["LoginUser"] == null && Session["Log_Usuario1"] == null)
             {
                 Response.Redirect("~/LOGIN/FRMLOGIN.aspx");
                 return;
             }
 
             // Asigna los datos del usuario obtenidos de la sesión a las etiquetas de pantalla
-            codeLabel.Text = (string)Session["LoginCode"];
-            usernameLabel.Text = (string)Session["LoginUser"];
-            nameLabel.Text = (string)Session["LoginName"];
-            surnameLabel.Text = (string)Session["LoginSurname"];
-            departmentLabel.Text = (string)Session["LoginDepartment"];
-            roleLabel.Text = (string)Session["LoginRole"];
+            codeLabel.Text = (string)(Session["LoginCode"] ?? Session["Log_Codigo"]);
+            usernameLabel.Text = (string)(Session["LoginUser"] ?? Session["Log_Usuario1"]);
+            nameLabel.Text = (string)(Session["LoginName"] ?? Session["Log_Nombre"]);
+            surnameLabel.Text = (string)(Session["LoginSurname"] ?? Session["Log_Apellido"]);
+            departmentLabel.Text = (string)(Session["LoginDepartment"] ?? Session["Log_Departamento"]);
+            roleLabel.Text = (string)(Session["LoginRole"] ?? Session["Log_Cargo"]);
 
             try
             {

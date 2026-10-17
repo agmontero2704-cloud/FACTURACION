@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -46,6 +46,14 @@ namespace FACTURACION.LOGIN
                             Session["LoginDepartment"] = dataReader["log_departamento"].ToString();
                             Session["LoginRole"] = dataReader["log_cargo"].ToString();
 
+                            Session["Log_Status"] = dataReader["log_status"].ToString();
+                            Session["Log_Codigo"] = dataReader["log_codigo"].ToString();
+                            Session["Log_Usuario1"] = usernameTextBox.Text;
+                            Session["Log_Nombre"] = dataReader["log_nombre"].ToString();
+                            Session["Log_Apellido"] = dataReader["log_apellido"].ToString();
+                            Session["Log_Departamento"] = dataReader["log_departamento"].ToString();
+                            Session["Log_Cargo"] = dataReader["log_cargo"].ToString();
+
                             // Si el usuario está activo, bloquea campos y redirige tras el temporizador
                             if (dataReader["log_status"].ToString() == "Activo")
                             {
@@ -77,8 +85,9 @@ namespace FACTURACION.LOGIN
             catch (Exception exception)
             {
                 // Error de conexión con la base de datos
-                System.Diagnostics.Debug.WriteLine("Error de conexion con la Base de Datos: " + exception.Message);
-                messageLabel.Text = "Mensaje.: No hay conexion con la Base de Datos";
+                System.Diagnostics.Debug.WriteLine("Error de conexion con la Base de Datos: " + exception.ToString());
+                messageLabel.Text = "Mensaje.: Error de conexion (" + exception.Message + ")";
+                sessionTimer.Enabled = true;
             }
         }
 

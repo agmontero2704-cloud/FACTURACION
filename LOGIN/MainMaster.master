@@ -1,4 +1,4 @@
-﻿<%-- Master page principal del sistema. Define la estructura común (cabecera, menú, columnas y pie)
+<%-- Master page principal del sistema. Define la estructura común (cabecera, menú, columnas y pie)
     para todas las páginas hijas. Carga jQuery y el script propio site.js al final del cuerpo. --%>
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs" Inherits="FACTURACION.LOGIN.MainMaster" %>
 
@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=1280, initial-scale=1.0"/>
     <title>Sistema de Facturacion</title>
     <link rel="shortcut icon" type="image/x-icon" href="/IMAGENES/Favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/App_Themes/Tema1/StyleSheet1.css"/>
     <%-- Lugar donde se inyecta el contenido del encabezado de cada página --%>
     <asp:ContentPlaceHolder ID="headPlaceholder" runat="server"></asp:ContentPlaceHolder>
 </head>

@@ -1,4 +1,4 @@
-﻿<%-- Página de inicio de sesión del sistema. No usa master page (es independiente). --%>
+<%-- Página de inicio de sesión del sistema. No usa master page (es independiente). --%>
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FRMLOGIN.aspx.cs" Inherits="FACTURACION.LOGIN.LoginPage" %>
 
 <!DOCTYPE html>
@@ -12,10 +12,11 @@
 
     <%-- Icono que identifica la aplicación --%>
     <link rel="shortcut icon" type="image/x-icon" href="/IMAGENES/Favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/App_Themes/Tema1/StyleSheet1.css"/>
 
-    <%-- Estilos CSS para el fondo y la resolución fija de la pantalla de login --%>
+    <%-- Estilos CSS para centrar perfectamente la pantalla de login --%>
     <style type="text/css">
-        html {
+        html, body {
             width: 100%;
             height: 100%;
             margin: 0;
@@ -23,26 +24,32 @@
             background-color: #0b0f19;
         }
         body {
-            width: 1280px;
-            height: 1024px;
-            min-height: 1024px;
-            max-width: 1280px;
-            max-height: 1024px;
-            margin: 0 auto;
-            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             background-image: url('/IMAGENES/Fondo1.jpg');
-            background-size: 1280px 1024px;
+            background-size: cover;
+            background-position: center;
             background-repeat: no-repeat;
-            background-position: center top;
-            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.85);
-            overflow: hidden;
-            box-sizing: border-box;
+            overflow: auto;
+        }
+        #form1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 100vh;
+            margin: auto;
         }
         #contenedorLogin {
             width: 1280px;
             height: 1024px;
             position: relative;
-            margin: 0 auto;
+            margin: auto;
+            flex-shrink: 0;
+            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.85);
+            background-color: transparent;
         }
     </style>
 </head>
@@ -54,7 +61,7 @@
 
             <%-- Imagen de almacén de cajas --%>
             <asp:Image ID="warehouseImage" runat="server"
-                ImageUrl="~/IMAGENES/CajasAlmacen.png" CssClass="CajasAlmacen" Height="430px"
+                ImageUrl="~/IMAGENES/CajasAlmacen.png" CssClass="CajasAlmacen warehouseImage" Height="430px"
                 Width="790px" />
 
             <div id="Logo">
@@ -64,49 +71,49 @@
 
             <%-- Panel principal de acceso al sistema --%>
             <asp:Panel ID="accessPanel" runat="server" BorderColor="Black" BorderStyle="Solid"
-                CssClass="accessPanel" Width="520px" Height="268px"
+                CssClass="PnlAcceso accessPanel" Width="520px" Height="268px"
                 BackImageUrl="~/IMAGENES/FondoLogin.png">
 
                 <%-- Barra superior del formulario de login --%>
                 <asp:Panel ID="controlPanel" runat="server" Height="37px" Width="520px"
                     BackColor="#3399FF">
                     <asp:Label ID="controlLabel" runat="server" Text="Control de Acceso" Font-Bold="True"
-                        ForeColor="White" Font-Size="Larger" CssClass="controlLabel"></asp:Label>
+                        ForeColor="White" Font-Size="Larger" CssClass="LblControl controlLabel"></asp:Label>
                 </asp:Panel>
 
                 <%-- Imagen de candado rojo (estado inicial) --%>
                 <asp:Image ID="lockImage" runat="server"
                     ImageUrl="~/IMAGENES/CerraduraRoja.png" Height="85px" Width="95px"
-                    CssClass="lockImage" />
+                    CssClass="ImgCerradura lockImage" />
 
                 <%-- Etiqueta del campo de usuario --%>
                 <asp:Label ID="usernameLabel" runat="server" Text="Usuario.:" Font-Bold="True"
-                    ForeColor="White" Font-Size="Large" CssClass="usernameLabel"></asp:Label>
+                    ForeColor="White" Font-Size="Large" CssClass="LblUsuario usernameLabel"></asp:Label>
 
                 <%-- Etiqueta del campo de contraseña --%>
                 <asp:Label ID="passwordLabel" runat="server" Text="Clave.:" Font-Bold="True"
-                    ForeColor="White" Font-Size="Large" CssClass="passwordLabel"></asp:Label>
+                    ForeColor="White" Font-Size="Large" CssClass="LblClave passwordLabel"></asp:Label>
 
                 <%-- Campo de texto para el usuario --%>
                 <asp:TextBox ID="usernameTextBox" runat="server" Font-Bold="True" ToolTip="Introduzca su Usuario"
                     Font-Size="Large" ForeColor="#0066FF" AutoCompleteType="Disabled"
-                    CssClass="usernameTextBox"></asp:TextBox>
+                    CssClass="TxtUsuario usernameTextBox"></asp:TextBox>
 
                 <%-- Campo de texto para la contraseña --%>
                 <asp:TextBox ID="passwordTextBox" runat="server" Font-Bold="True" ToolTip="Introduzca su Clave"
                     Font-Size="Large" ForeColor="#0066FF" AutoCompleteType="Disabled"
-                    CssClass="passwordTextBox" TextMode="Password"></asp:TextBox>
+                    CssClass="TxtClave passwordTextBox" TextMode="Password"></asp:TextBox>
 
                 <%-- Botón de aceptar validación de login --%>
                 <asp:Button ID="acceptButton" runat="server" Text="Aceptar" Font-Bold="True"
                     ToolTip="Presione para Aceptar la validacion" BorderStyle="Outset" Width="80px"
-                    Height="40px" CssClass="acceptButton" OnClick="AcceptButton_Click"/>
+                    Height="40px" CssClass="BtnAceptar acceptButton" OnClick="AcceptButton_Click"/>
 
                 <%-- Panel para mostrar mensajes al usuario --%>
                 <asp:Panel ID="messagePanel" runat="server" Height="37px" Width="520px"
-                    CssClass="messagePanel" BackColor="Black">
+                    CssClass="PnlMensaje messagePanel" BackColor="Black">
                     <asp:Label ID="messageLabel" runat="server" Text="Mensaje.:" Font-Bold="True"
-                        ForeColor="White" CssClass="messageLabel"></asp:Label>
+                        ForeColor="White" CssClass="LblMensaje messageLabel"></asp:Label>
                 </asp:Panel>
             </asp:Panel>
 
