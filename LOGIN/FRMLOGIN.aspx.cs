@@ -85,7 +85,7 @@ namespace FACTURACION.LOGIN
             if (LblMensaje.Text == "Mensaje.: Login correcto")
             {
                 Session["Log_Usuario"] = LblMensaje.Text;
-                Response.Redirect("~/Login/Default.aspx");
+                Response.Redirect("~/Default.aspx");
             }
             else
             {

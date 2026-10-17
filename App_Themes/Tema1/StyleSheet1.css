@@ -1,4 +1,31 @@
+html {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #2b2b2b;
+}
+
 body {
+    width: 1280px;
+    height: 1024px;
+    min-height: 1024px;
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
+    overflow-x: hidden;
+}
+
+#contenedorApp, #form1 {
+    width: 1280px;
+    height: 1024px;
+    min-height: 1024px;
+    position: relative;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 /********************************* Login *********************************/
@@ -85,6 +112,7 @@ body {
 
 /********************************* Maquetación (Menú Principal) *********************************/
 #cabecera {
+    width: 1280px;
     height: 150px;
     background-color: #FF7800;
     color: white;
@@ -92,11 +120,13 @@ body {
     box-shadow: 0px 0px 10px #000;
     position: relative;
     z-index: 2;
+    box-sizing: border-box;
 }
 
 #contenidoCabecera {
-    width: 960px;
-    margin: auto;
+    width: 1280px;
+    margin: 0 auto;
+    position: relative;
 }
 
 #barraHorizontal {
@@ -105,8 +135,8 @@ body {
     border-radius: 0px 0px 10px 10px;
     box-shadow: 0px 0px 10px #000 inset;
     text-align: center;
-    width: 1260px;
-    margin-left: -150px;
+    width: 1280px;
+    margin: 0 auto;
 }
 
 #barraHorizontal > ul {
@@ -163,7 +193,15 @@ body {
     width: 48%;
 }
 
+#bajo {
+    width: 1280px;
+    min-height: 844px;
+    position: relative;
+    box-sizing: border-box;
+}
+
 #pie {
+    width: 1280px;
     height: 30px;
     background-color: #A64E06;
     border-radius: 0px 0px 20px 20px;
@@ -171,6 +209,10 @@ body {
     box-shadow: 0px 0px 5px #000 inset;
     color: white;
     padding-top: 7px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    box-sizing: border-box;
 }
 
 #copy {

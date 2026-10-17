@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace FACTURACION
 {
@@ -21,6 +22,8 @@ namespace FACTURACION
         {
             this.Base = "Facturacion";
             this.Servidor = "localhost"; // O puedes usar "."
+            this.Usuario = "";
+            this.Clave = "";
             this.seguridad = true;       // Activa la Autenticación de Windows
         }
 
@@ -30,15 +33,23 @@ namespace FACTURACION
             SqlConnection Cadena = new SqlConnection();
             try
             {
-                Cadena.ConnectionString = "Server=" + this.Servidor + "; Database=" + this.Base + ";";
-
-                if (this.seguridad)
+                var cnSetting = ConfigurationManager.ConnectionStrings["CnFact"];
+                if (cnSetting != null && !string.IsNullOrWhiteSpace(cnSetting.ConnectionString))
                 {
-                    Cadena.ConnectionString = Cadena.ConnectionString + "Integrated Security = SSPI;";
+                    Cadena.ConnectionString = cnSetting.ConnectionString;
                 }
                 else
                 {
-                    Cadena.ConnectionString = Cadena.ConnectionString + "User Id=" + this.Usuario + "; Password=" + this.Clave + ";";
+                    Cadena.ConnectionString = "Server=" + this.Servidor + "; Database=" + this.Base + ";";
+
+                    if (this.seguridad)
+                    {
+                        Cadena.ConnectionString += "Integrated Security = SSPI;";
+                    }
+                    else
+                    {
+                        Cadena.ConnectionString += "User Id=" + this.Usuario + "; Password=" + this.Clave + ";";
+                    }
                 }
             }
             catch (Exception ex)

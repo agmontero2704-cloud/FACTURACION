@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="deafaultmantenimiento.master.cs" Inherits="FACTURACION.mantenimiento.deafaultmantenimiento" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="deafaultmantenimiento.aspx" Inherits="FACTURACION.mantenimiento.deafaultmantenimiento" %>
 
 <!DOCTYPE html>
 
@@ -12,7 +12,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <%--inicio de la aplicacion-- %>
+         <%-- inicio de la aplicacion --%>
             <h2>&nbsp mantenimiento</h2>
             <img src="../IMAGENES/IMAGENES/CajasAlmacen.png" />
            <asp:Content ID="Content2" ContentPlaceHolderID="contenidoMenuContextual" runat="server">

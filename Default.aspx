@@ -1,52 +1,16 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="FACTURACION._Default" %>
+<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/LOGIN/principal.master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="FACTURACION._Default" %>
 
-<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="ContentHead" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
 
-    <main>
-        <section class="row" aria-labelledby="aspnetTitle">
-            <h1 id="aspnetTitle">ASP.NET</h1>
-            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-            <p><a href="http://www.asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-        </section>
+<asp:Content ID="ContentMenu" ContentPlaceHolderID="contenidoMenuContextual" runat="server">
+</asp:Content>
 
-        <div class="row">
-            <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-                <h2 id="gettingStartedTitle">Getting started</h2>
-                <p>
-                    ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-                A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="librariesTitle">
-                <h2 id="librariesTitle">Get more libraries</h2>
-                <p>
-                    NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="hostingTitle">
-                <h2 id="hostingTitle">Web Hosting</h2>
-                <p>
-                    You can easily find a web hosting company that offers the right mix of features and price for your applications.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-                </p>
-            </section>
-        </div>
-    </main>
-
-</asp:Content><asp:Content ID="Content3" ContentPlaceHolderID="contenidoPrincipal" runat="server">
-
-    <%--Inicio de la aplicacion--%>
-    <h2>&nbsp Bienvenido</h2>
-
-    <img src="/Imagenes/CajasAlmacen.png" />
+<asp:Content ID="ContentPrincipal" ContentPlaceHolderID="contenidoPrincipal" runat="server">
+    <div style="text-align: center; padding-top: 30px;">
+        <h2>Bienvenido al Sistema de Facturaci&oacute;n</h2>
+        <img src="/IMAGENES/CajasAlmacen.png" alt="Cajas Almacen" style="max-width: 790px; height: auto;" />
+    </div>
 
     <asp:Label ID="LblCodigo" runat="server" Text="" Visible="false"></asp:Label>
     <asp:Label ID="LblUsuario" runat="server" Text="" Visible="false"></asp:Label>
@@ -54,5 +18,4 @@
     <asp:Label ID="LblApellido" runat="server" Text="" Visible="false"></asp:Label>
     <asp:Label ID="LblDepartamento" runat="server" Text="" Visible="false"></asp:Label>
     <asp:Label ID="LblCargo" runat="server" Text="" Visible="false"></asp:Label>
-
 </asp:Content>
