@@ -129,9 +129,9 @@ body {
     position: relative;
 }
 
-#topBar {
+#topBar, #barraHorizontal {
     height: 40px;
-    background-color: #A64E06;
+    background-color: #803900;
     border-radius: 0px 0px 10px 10px;
     box-shadow: 0px 0px 10px #000 inset;
     text-align: center;
@@ -139,58 +139,69 @@ body {
     margin: 0 auto;
 }
 
-#topBar > ul {
+#topBar > ul, #barraHorizontal > ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-}
-
-#topBar li {
     display: inline-block;
-    padding: 10px;
-    cursor: pointer;
-    background-color: #FF9A40;
-    color: #A64E06;
-    box-shadow: 0px 0px 5px #000 inset;
 }
 
-#topBar li > a {
+#topBar li, #barraHorizontal li {
+    display: inline-block;
+    margin: 3px 2px 0 2px;
+    cursor: pointer;
+    background-color: #c67128;
+    box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.35), inset -1px -1px 2px rgba(0, 0, 0, 0.4);
+    border: 1px solid #5a2700;
+    border-radius: 3px;
+}
+
+#topBar li > a, #barraHorizontal li > a {
     display: block;
-    color: #A64E06;
+    padding: 6px 16px;
+    color: #ffffff;
     text-decoration: none;
     font-weight: bold;
+    font-size: 13.5px;
+    text-shadow: 1px 1px 2px #000000;
+}
+
+#topBar li > a:hover, #barraHorizontal li > a:hover,
+#topBar li.active > a, #barraHorizontal li.active > a,
+#topBar li > a.active, #barraHorizontal li > a.active {
+    background-color: #994805;
+    color: #ffffff;
 }
 
 #logotipo {
-    width: 35%;
+    width: 220px;
     float: left;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 8px;
+    margin-left: 20px;
 }
 
 .img-responsive {
-    width: 200px;
-    height: 90px;
-    position: absolute;
-    margin-left: -307px;
+    max-width: 200px;
+    max-height: 85px;
+    display: inline-block;
+    position: static;
+    margin-left: 0;
 }
 
 #titulo {
-    width: 60%;
     float: left;
-    text-shadow: 2px 2px 3px #000;
+    width: 780px;
+    text-align: center;
+    text-shadow: 2px 2px 4px #000000;
 }
 
 #titulo > h1 {
-    margin-top: 36px;
-    margin-left: -100px;
-}
-
-#columnCentro > img {
-    position: absolute;
-    margin-left: 138px;
-    margin-top: 90px;
-    width: 48%;
+    margin-top: 25px;
+    font-size: 34px;
+    color: #ffffff;
+    font-weight: bold;
+    letter-spacing: 0.5px;
 }
 
 #bajo {
@@ -198,32 +209,128 @@ body {
     min-height: 844px;
     position: relative;
     box-sizing: border-box;
+    background-color: #FF7800;
+    overflow: hidden;
+    padding-bottom: 40px;
+}
+
+#columnIzq {
+    width: 230px;
+    float: left;
+    padding: 10px 10px 10px 15px;
+    box-sizing: border-box;
+    background-color: #FF7800;
+}
+
+#menuContextual, #contextMenu, .menuContextual {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menuContextual li, #contextMenu li, .menuContextual li {
+    margin-bottom: 4px;
+    list-style: none;
+}
+
+#menuContextual li > a, #contextMenu li > a, .menuContextual li > a {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: linear-gradient(to bottom, #A64E06 0%, #803900 50%, #5e2800 100%);
+    background-color: #803900;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 13.5px;
+    border: 1px solid #4a1f00;
+    border-top: 1px solid #bf5a08;
+    border-radius: 2px;
+    box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.35), inset 0px -1px 2px rgba(0, 0, 0, 0.5), 0px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 2px #000000;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+}
+
+#menuContextual li > a:hover, #contextMenu li > a:hover, .menuContextual li > a:hover,
+#menuContextual li > a.active, #contextMenu li > a.active, .menuContextual li > a.active {
+    background: linear-gradient(to bottom, #bf5a08 0%, #994400 50%, #703000 100%);
+    color: #ffffff;
+    box-shadow: inset 0px 1px 2px rgba(255, 255, 255, 0.5), 0px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+#columnCentro {
+    margin-left: 235px;
+    margin-right: 15px;
+    margin-top: 10px;
+    background-color: #ffffff;
+    min-height: 770px;
+    border: 1px solid #5a2700;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    padding: 25px 35px;
+    box-sizing: border-box;
+}
+
+#columnCentro h2, .mantenimiento-card h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 26px;
+    color: #000000;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.mantenimiento-img-container {
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.img-cajas-almacen {
+    max-width: 620px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+#columnCentro > img {
+    display: block;
+    margin: 40px auto;
+    max-width: 600px;
+    height: auto;
+    position: static;
 }
 
 #pie {
     width: 1280px;
     height: 30px;
-    background-color: #A64E06;
+    background-color: #803900;
     border-radius: 0px 0px 20px 20px;
     clear: both;
     box-shadow: 0px 0px 5px #000 inset;
     color: white;
-    padding-top: 7px;
+    padding-top: 5px;
     position: absolute;
     bottom: 0px;
     left: 0px;
     box-sizing: border-box;
+    font-size: 13px;
 }
 
 #copy {
     position: absolute;
-    margin-top: 3px;
+    left: 20px;
+    top: 6px;
 }
 
 .LblIdentificacion {
     position: absolute;
-    margin-left: 1060px;
-    margin-top: 3px;
+    right: 30px;
+    top: 6px;
 }
 /********************************* Fin Maquetacion *********************************/
 

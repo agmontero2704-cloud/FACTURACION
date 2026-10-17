@@ -1,4 +1,4 @@
-﻿//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // <generado automáticamente>
 //     Este código fue generado por una herramienta.
 //
@@ -27,6 +27,16 @@ namespace FACTURACION.LOGIN
         protected global::System.Web.UI.WebControls.Repeater Repeater1;
 
         /// <summary>
+        /// Repetidor del logotipo de la empresa.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Repeater logoRepeater;
+
+        /// <summary>
+        /// Panel para mostrar el logotipo por defecto si no hay imagen en BD.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.PlaceHolder pnlDefaultLogo;
+
+        /// <summary>
         /// Lugar donde se inyecta el menú contextual lateral.
         /// </summary>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder contextualMenuPlaceholder;
@@ -35,5 +45,10 @@ namespace FACTURACION.LOGIN
         /// Lugar donde se inyecta el contenido principal de la página.
         /// </summary>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder mainContentPlaceholder;
+
+        /// <summary>
+        /// Etiqueta para mostrar el nombre de usuario autenticado en el pie.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label lblUsuarioPie;
     }
 }

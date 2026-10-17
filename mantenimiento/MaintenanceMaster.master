@@ -1,10 +1,10 @@
-﻿<%-- Master page anidada para el módulo de Mantenimiento. Define el menú contextual lateral
+<%-- Master page anidada para el módulo de Mantenimiento. Define el menú contextual lateral
     y expone un ContentPlaceHolder para el contenido de cada página de mantenimiento. --%>
 <%@ Master Language="C#" MasterPageFile="~/LOGIN/MainMaster.master" AutoEventWireup="true" CodeBehind="MaintenanceMaster.master.cs" Inherits="FACTURACION.mantenimiento.MaintenanceMaster" %>
 
 <%-- Contenido del menú contextual lateral con enlaces a las secciones de mantenimiento --%>
 <asp:Content ID="maintenanceMenuContent" ContentPlaceHolderID="contextualMenuPlaceholder" runat="server">
-    <ul id="contextMenu">
+    <ul id="contextMenu" class="menuContextual">
         <li><a runat="server" href="~/mantenimiento/MaintenancePage.aspx#empresa">Crear Empresa</a></li>
         <li><a runat="server" href="~/mantenimiento/MaintenancePage.aspx#cajas">Crear Cajas</a></li>
         <li><a runat="server" href="~/mantenimiento/MaintenancePage.aspx#bodegas">Crear Bodegas</a></li>

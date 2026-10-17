@@ -33,11 +33,11 @@
        mantenimiento si cambian los IDs en el HTML.
        ------------------------------------------------------------------ */
 
-    // Selector de los enlaces (<a>) dentro del menú contextual (#contextMenu).
-    var CONTEXT_MENU_SELECTOR = "#contextMenu a";
+    // Selector de los enlaces (<a>) dentro del menú contextual (#contextMenu, #menuContextual, .menuContextual).
+    var CONTEXT_MENU_SELECTOR = "#contextMenu a, #menuContextual a, .menuContextual a";
 
-    // Selector de los enlaces (<a>) dentro de la barra superior (#topBar).
-    var TOP_BAR_SELECTOR = "#topBar a";
+    // Selector de los enlaces (<a>) dentro de la barra superior (#topBar, #barraHorizontal).
+    var TOP_BAR_SELECTOR = "#topBar a, #barraHorizontal a";
 
     // Selector de todas las secciones (<section>) que tengan un atributo id.
     var SECTIONS_SELECTOR = "section[id]";

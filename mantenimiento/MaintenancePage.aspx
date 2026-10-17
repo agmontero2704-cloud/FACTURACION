@@ -1,12 +1,14 @@
-﻿<%-- Página única del módulo de Mantenimiento. Agrupa en secciones todas las opciones
+<%-- Página única del módulo de Mantenimiento. Agrupa en secciones todas las opciones
     de mantenimiento y permite navegar entre ellas mediante anclas (#id). --%>
 <%@ Page Title="Mantenimiento" Language="C#" MasterPageFile="~/mantenimiento/MaintenanceMaster.master" AutoEventWireup="true" CodeBehind="MaintenancePage.aspx.cs" Inherits="FACTURACION.mantenimiento.MaintenancePage" %>
 
 <asp:Content ID="maintenanceContent" ContentPlaceHolderID="maintenanceContentPlaceholder" runat="server">
-    <div>
+    <div class="mantenimiento-card">
         <h2>Mantenimiento</h2>
-        <img src="../IMAGENES/CajasAlmacen.png" alt="Mantenimiento" />
-        <p>Seleccione una opci&oacute;n del men&uacute; de mantenimiento.</p>
+        <div class="mantenimiento-img-container">
+            <img src="/IMAGENES/CajasAlmacen.png" alt="CajasAlmacen" class="img-cajas-almacen" />
+        </div>
+        <p style="text-align: center; color: #666; font-style: italic;">Seleccione una opci&oacute;n del men&uacute; de mantenimiento.</p>
 
         <%-- Sección: Crear Empresa --%>
         <section id="empresa">

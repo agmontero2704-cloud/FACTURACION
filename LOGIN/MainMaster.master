@@ -23,7 +23,7 @@
                     <div id="topBar">
                         <ul>
                             <li><a href="/Default.aspx">Inicio</a></li>
-                            <li><a href="/mantenimiento/MaintenancePage.aspx">Mantenimiento</a></li>
+                            <li><a href="/mantenimiento/DefaultMantenimiento.aspx">Mantenimiento</a></li>
                             <%-- TODO: Operaciones/Reportes/Seguridad/Utilitarios/Ayuda aún apuntan a un marcador temporal. Crear sus páginas y actualizar estos enlaces. --%>
                             <li><a href="/Default.aspx">Operaciones</a></li>
                             <li><a href="/Default.aspx">Reportes</a></li>
@@ -34,16 +34,19 @@
                     </div>
 
                     <div id="logotipo">
-                        <%-- Llamar imagen de la Base de datos --%>
+                        <%-- Llamar imagen de la Base de datos con fallback --%>
                         <div class="row">
                             <asp:Repeater ID="logoRepeater" runat="server">
                                 <ItemTemplate>
                                     <div class="col-md-4">
-                                        <img class="img-responsive" src="data:image/jpg;base64,<%# Convert.ToBase64String((byte[])DataBinder.Eval(Container.DataItem, "Emp_Logo"))%>" />
+                                        <img class="img-responsive" src="data:image/jpg;base64,<%# Convert.ToBase64String((byte[])DataBinder.Eval(Container.DataItem, "Emp_Logo"))%>" alt="Logo" />
                                         <br />
                                     </div>
                                 </ItemTemplate>
                             </asp:Repeater>
+                            <asp:PlaceHolder ID="pnlDefaultLogo" runat="server">
+                                <img class="img-responsive" src="/IMAGENES/Logo3.png" alt="Logo" />
+                            </asp:PlaceHolder>
                         </div>
                     </div>
 
@@ -57,6 +60,15 @@
                 <%-- Columna izquierda: menú contextual --%>
                 <div id="columnIzq">
                     <asp:ContentPlaceHolder ID="contextualMenuPlaceholder" runat="server">
+                        <ul id="menuContextual" class="menuContextual">
+                            <li><a runat="server" href="~/mantenimiento/DefaultMantenimiento.aspx#empresa">Crear Empresa</a></li>
+                            <li><a runat="server" href="~/mantenimiento/DefaultMantenimiento.aspx#cajas">Crear Cajas</a></li>
+                            <li><a runat="server" href="~/mantenimiento/DefaultMantenimiento.aspx#bodegas">Crear Bodegas</a></li>
+                            <li><a runat="server" href="~/mantenimiento/DefaultMantenimiento.aspx#clientes">Crear Clientes</a></li>
+                            <li><a runat="server" href="~/mantenimiento/DefaultMantenimiento.aspx#productos">Crear Productos</a></li>
+                            <li><a runat="server" href="~/mantenimiento/DefaultMantenimiento.aspx#suplidores">Crear Suplidores</a></li>
+                            <li><a runat="server" href="~/mantenimiento/DefaultMantenimiento.aspx#codigo">Crear Codigo Barra y QR</a></li>
+                        </ul>
                     </asp:ContentPlaceHolder>
                 </div>
 
@@ -73,6 +85,7 @@
                 <%-- Pie de página --%>
                 <div id="pie">
                     <span id="copy">&nbsp;&nbsp;&nbsp;&nbsp;Copyright &copy; 2026 / Version: 1.0</span>
+                    <span class="LblIdentificacion">Usuario: <asp:Label ID="lblUsuarioPie" runat="server"></asp:Label></span>
                 </div>
             </div>
         </div>
